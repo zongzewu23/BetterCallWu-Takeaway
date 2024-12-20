@@ -16,11 +16,11 @@ const queryCategoryById = (id) => {
 }
 
 // Delete the interface of the current column
-const deleCategory = (ids) => {
+const deleCategory = (id) => {
   return $axios({
     url: '/category',
     method: 'delete',
-    params: { ids }
+    params: { id }
   })
 }
 

@@ -9,6 +9,9 @@ spring:
       url: jdbc:mysql://localhost:3306/reggie?serverTimezone=America/Los_Angeles&useUnicode=true&characterEncoding=utf8
       username: root
       password: "20040622Wzz@"
+    output:
+      ansi:
+        enabled: ALWAYS
 mybatis-plus:
   configuration:
 
