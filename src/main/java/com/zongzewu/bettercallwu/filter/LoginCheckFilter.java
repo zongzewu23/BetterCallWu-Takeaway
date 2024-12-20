@@ -1,6 +1,7 @@
 package com.zongzewu.bettercallwu.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.zongzewu.bettercallwu.common.BaseContext;
 import com.zongzewu.bettercallwu.common.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.AntPathMatcher;
@@ -43,6 +44,10 @@ public class LoginCheckFilter implements Filter {
         //check whether logged in
         if(request.getSession().getAttribute("employee") != null){
             log.info("User has already logged in, id: {}", request.getSession().getAttribute("employee"));
+            Long empId = (Long) request.getSession().getAttribute("employee");
+
+            BaseContext.setCurrentId(empId);
+
             filterChain.doFilter(request, response);
             return;
         }
