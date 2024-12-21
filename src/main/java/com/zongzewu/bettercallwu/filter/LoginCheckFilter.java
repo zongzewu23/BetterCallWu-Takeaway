@@ -30,7 +30,8 @@ public class LoginCheckFilter implements Filter {
           "/employee/login",
           "/employee/logout",
           "/backend/**",
-          "/front/**"
+          "/front/**",
+                "/common/**"
         };
 
         // Determine if the request is in the urls
