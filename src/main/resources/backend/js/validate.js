@@ -15,7 +15,7 @@ function isCellPhone (val) {
   }
 }
 
-//校验账号
+//check account
 function checkUserName (rule, value, callback){
   if (value == "") {
     callback(new Error("Please enter your account or username"))
@@ -38,7 +38,7 @@ function checkName (rule, value, callback){
 }
 
 function checkPhone(rule, value, callback) {
-  //(XXX) XXX-XXXX, XXX-XXX-XXXX 或 XXXXXXXXXX
+  //(XXX) XXX-XXXX, XXX-XXX-XXXX or XXXXXXXXXX
   let phoneReg = /^(?:\+1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
   if (value === "") {
     callback(new Error("Please enter your phone number"));
