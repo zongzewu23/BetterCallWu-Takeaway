@@ -1,0 +1,12 @@
+[33m92917b4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Regular commit ,  combo management framework done
+[33m7e7c4a8[m[33m ([m[1;31morigin/main[m[33m)[m Implement the function of adding new dishes
+[33mbb5a2cb[m dish management HTML and it's js and vue
+[33m7a24ccd[m enable file upload function
+[33m57d2d39[m Implemented category management related functions and optimized the deletability check function when deleting a category.
+[33m3f99186[m The employee management function is completed, and the function of uniformly updating fields is completed
+[33md5c11a0[m The employee management function is completed, and the function of uniformly updating fields is completed
+[33m1d9331c[m Creation of the basic structure of Category management classes and interfaces
+[33m8605ddc[m now implementing Category management
+[33m7e37cb8[m Merge branch 'master'
+[33m11a31be[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m first update
+[33m6afb9f2[m Initial commit
