@@ -1,20 +1,25 @@
 (function (win) {
-  axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
-  // 创建axios实例
-  const service = axios.create({
-    // axios中请求配置有baseURL选项，表示请求URL公共部分
-    baseURL: '/',
-    // 超时
-    timeout: 10000
-  })
-  // request拦截器
-  service.interceptors.request.use(config => {
-    // 是否需要设置 token
-    // const isToken = (config.headers || {}).isToken === false
-    // if (getToken() && !isToken) {
-    //   config.headers['Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-    // }
-    // get请求映射params参数
+// Set default headers for all axios requests
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
+
+// Create an axios instance
+const service = axios.create({
+  // The base URL for all requests, representing the common part of the request URL
+  baseURL: '/',
+  // Timeout setting in milliseconds, requests will be canceled if they exceed this time
+  timeout: 10000
+});
+
+// Request interceptor
+service.interceptors.request.use(config => {
+  // Check if a token needs to be added to the request
+  // const isToken = (config.headers || {}).isToken === false;
+  // if (getToken() && !isToken) {
+  //   // If a token exists and the request requires it, add the token to the Authorization header
+  //   config.headers['Authorization'] = 'Bearer ' + getToken();
+  // }
+
+  // Map GET requests' params
     if (config.method === 'get' && config.params) {
       let url = config.url + '?';
       for (const propName of Object.keys(config.params)) {
@@ -41,31 +46,41 @@
       Promise.reject(error)
   })
 
-  // 响应拦截器
-  service.interceptors.response.use(res => {
-      console.log('---响应拦截器---',res)
-      if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// 返回登录页面
-        window.top.location.href = '/front/page/login.html'
+  // Response interceptor
+  service.interceptors.response.use(
+    res => {
+      // Log the response for debugging purposes
+      console.log('---Response Interceptor---', res);
+
+      // Check if the response indicates the user is not logged in
+      if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {
+        // Redirect the user to the login page
+        window.top.location.href = '/front/page/login.html';
       } else {
-        return res.data
+        // Return the response data if there are no issues
+        return res.data;
       }
     },
     error => {
+      // Extract the error message
       let { message } = error;
+
+      // Handle different types of errors with user-friendly messages
       if (message == "Network Error") {
-        message = "后端接口连接异常";
+        message = "Backend interface connection error";
+      } else if (message.includes("timeout")) {
+        message = "System interface request timeout";
+      } else if (message.includes("Request failed with status code")) {
+        // Extract the HTTP status code and append it to the error message
+        message = "System interface error with status code " + message.substr(message.length - 3);
       }
-      else if (message.includes("timeout")) {
-        message = "系统接口请求超时";
-      }
-      else if (message.includes("Request failed with status code")) {
-        message = "系统接口" + message.substr(message.length - 3) + "异常";
-      }
+
+      // Use Vant's Notify component to display a warning notification
       window.vant.Notify({
         message: message,
         type: 'warning',
-        duration: 5 * 1000
-      })
+        duration: 5 * 1000 // Display for 5 seconds
+      });
       //window.top.location.href = '/front/page/no-wify.html'
       return Promise.reject(error)
     }

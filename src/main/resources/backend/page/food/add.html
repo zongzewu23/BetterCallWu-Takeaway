@@ -346,7 +346,7 @@ validator: (rules, value, callback) => {
                 // this.imageUrl = res.data.data.image
                 this.imageUrl = `/common/download?name=${res.data.image}`
               } else {
-                this.$message.error(res.msg || '操作失败')
+                this.$message.error(res.msg || 'Operation failed')
               }
             })
           },
@@ -393,7 +393,7 @@ validator: (rules, value, callback) => {
               if (res.code === 1) {
                 this.dishList = res.data
               } else {
-                this.$message.error(res.msg || '操作失败')
+                this.$message.error(res.msg || 'Operation failed')
               }
             })
           },
