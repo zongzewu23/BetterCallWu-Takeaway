@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <!-- The above 3 meta tags *must* be placed first, and any other content *must* follow them! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
     <title>Better Call Wu</title>
     <link rel="icon" href="images/favico.ico">
-    <!--不同屏幕尺寸根字体设置-->
+    <!--Different screen sizes root font settings-->
     <script src="./js/base.js"></script>
-    <!--element-ui的样式-->
+    <!--element-ui-->
     <link rel="stylesheet" href="../backend/plugins/element-ui/index.css" />
-    <!--引入vant样式-->
+    <!--import vant style-->
     <link rel="stylesheet" href="styles/vant.min.css"/>
-    <!-- 引入样式  -->
+    <!-- Importing styles  -->
     <link rel="stylesheet" href="styles/index.css" />
-    <!--本页面内容的样式-->
+    <!--The style of this page's content-->
     <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
@@ -27,7 +27,7 @@
         <div class="divStatic">
           <img src="./images/logo.png"  class="logo"/>
           <div class="divDesc">
-            <div class="divName">菩提阁餐厅</div>
+            <div class="divName">Better Call Wu Restaurant</div>
             <div class="divSend">
                 <span><img src="./images/time.png"/> 距离1.5km</span>
                 <span><img src="./images/money.png"/> 配送费6元</span>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="divDesc">
-          简介: 菩提阁中餐厅是菩提阁点餐的独立的品牌，定位“大众 化的美食外送餐饮”，旨为顾客打造专业美食。
+          Introduction: Better Call Wu Chinese Restaurant is an independent brand of Better Call Wu ordering, positioned as "popular gourmet food delivery catering", aiming to create professional food for customers.
         </div>
       </div>
       <div class="divBody">
@@ -57,7 +57,7 @@
                 <div class="divName">{{item.name}}</div>
                 <div class="divDesc">{{item.description}}</div>
                 <div class="divDesc">{{'月销' + (item.saleNum ? item.saleNum : 0)  }}</div>
-                <div class="divBottom"><span>￥</span><span>{{item.price/100}}</span></div>
+                <div class="divBottom"><span>$</span><span>{{item.price/100}}</span></div>
                 <div class="divNum">
                   <div class="divSubtract" v-if="item.number > 0">
                     <img src="./images/subtract.png" @click.prevent.stop="subtractCart(item)"/>
@@ -82,7 +82,7 @@
           <div :class="{imgCartActive: cartData && cartData.length > 0, imgCart:!cartData || cartData.length<1}" @click="openCart"></div>
           <div :class="{divGoodsNum:1===1, moreGoods:cartData && cartData.length > 99}" v-if="cartData && cartData.length > 0">{{ goodsNum }}</div>
           <div class="divNum">
-              <span>￥</span>
+              <span>$</span>
               <span>{{goodsPrice}}</span>
           </div>
           <div class="divPrice"></div>
@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="divBottom">
-            <div><span class="spanMoney">￥</span>{{dialogFlavor.price/100}}</div>
+            <div><span class="spanMoney">$</span>{{dialogFlavor.price/100}}</div>
             <div @click="dialogFlavorAddCart">加入购物车</div>
           </div>
           <div class="divFlavorClose" @click="dialogFlavor.show = false">
@@ -125,7 +125,7 @@
               <div class="divDesc">
                 <div class="name">{{item.name}}</div>
                 <div class="price">
-                  <span class="spanMoney">￥</span>{{item.amount}}</div>
+                  <span class="spanMoney">$</span>{{item.amount}}</div>
               </div>
               <div class="divNum">
                 <div class="divSubtract">
@@ -157,7 +157,7 @@
           </div>
           <div class="divNum">
             <div class="left">
-              <span>￥</span><span>{{detailsDialog.item.price/100}}</span>
+              <span>$</span><span>{{detailsDialog.item.price/100}}</span>
             </div>
             <div class="right">
                 <div class="divSubtract" v-if="detailsDialog.item.number > 0">
@@ -190,7 +190,7 @@
                 </el-image>
                 <div class="divSubTitle">{{item.name + '(' + item.copies + '份)' }}
                   <div class="divPrice">
-                    <span>￥</span><span>{{item.price/100}}</span>
+                    <span>$</span><span>{{item.price/100}}</span>
                   </div>
                 </div>                
                 <div class="content">{{item.description}}</div>
@@ -198,7 +198,7 @@
             </div>
           <div class="divNum">
               <div class="left">
-                <span>￥</span><span>{{setMealDialog.item.price/100}}</span>
+                <span>$</span><span>{{setMealDialog.item.price/100}}</span>
               </div>
               <div class="right">
                   <div class="divSubtract" v-if="setMealDialog.item.number > 0">
@@ -216,13 +216,13 @@
           </div>
         </van-dialog>
     </div>
-        <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+        <!-- Development version, including helpful command line warnings-->
         <script src="../backend/plugins/vue/vue.js"></script>
-        <!-- 引入组件库 -->
+        <!-- Import component library -->
         <script src="../backend/plugins/element-ui/index.js"></script>
-        <!-- 引入vant样式 -->
+        <!-- import vant style -->
         <script src="./js/vant.min.js"></script>        
-        <!-- 引入axios -->
+        <!-- Importing Axios -->
         <script src="../backend/plugins/axios/axios.min.js"></script>
         <script src="./js/request.js"></script>
         <script src="./js/common.js"></script>

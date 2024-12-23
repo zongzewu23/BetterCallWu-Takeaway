@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
-    <title>菩提阁</title>
+    <title>Better Call Wu</title>
     <link rel="icon" href="./../images/favico.ico">
-    <!--element-ui的样式-->
+    <!--element-ui-->
     <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css" />
-    <!-- 引入样式  -->
+    <!-- Importing styles  -->
     <link rel="stylesheet" href="../styles/index.css" />
-    <!--引入vant样式-->
+    <!--import vant style-->
     <link rel="stylesheet" href="../styles/vant.min.css"/>
-    <!--本页面内容的样式-->
+    <!--The style of this page's content-->
     <link rel="stylesheet" href="./../styles/user.css" />
 </head>
 <body>
@@ -58,14 +58,14 @@
                 </div>
                 <div class="result">
                     <span>共{{order[0].sumNum}} 件商品,实付</span>
-                    <span class="price">￥{{order[0].amount}}</span>
+                    <span class="price">${{order[0].amount}}</span>
                 </div>
                 <div class="btn" v-if="order[0].status === 4">
                     <div class="btnAgain" @click="addOrderAgain">再来一单</div>
                 </div>
             </div>
             <div class="quitLogin" @click="toPageLogin">
-                退出登录
+                log out
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
     <script src="../../backend/plugins/element-ui/index.js"></script>
     <!-- 引入vant组件 -->
     <script src="./../js/vant.min.js"></script>    
-    <!--不同屏幕尺寸根字体设置-->
+    <!--Different screen sizes root font settings-->
     <script src="./../js/base.js"></script>
     <!-- Importing Axios -->
     <script src="../../backend/plugins/axios/axios.min.js"></script>
