@@ -76,21 +76,21 @@
   text-align: center;
 }
 
-#login .btnNoPhone {
+#login .btnNoEmail {
   color: #666666;
   background: #d8d8d8;
 }
 
-#login .btnNoPhone:active {
+#login .btnNoEmail:active {
   background: #afafaf;
 }
 
-#login .btnPhone {
+#login .btnEmail {
   background: #ffc200;
   color: #333333;
 }
 
-#login .btnPhone:active {
+#login .btnEmail:active {
   background: rgba(255, 142, 0, 1);
   color: #333333;
 }

@@ -1,6 +1,9 @@
 server:
   port: 8080
 spring:
+  web:
+    resources:
+      static-locations: classpath:/front/, classpath:/backend/
   application:
     name: Better_Call_Wu
   datasource:
@@ -20,6 +23,8 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: ASSIGN_ID
+
+
 
 BCW:
   path: D:\

@@ -30,8 +30,10 @@ public class LoginCheckFilter implements Filter {
           "/employee/login",
           "/employee/logout",
           "/backend/**",
-          "/front/**",
-                "/common/**"
+                "/front/**",
+                "/common/**",
+                "/user/sendMsg",
+                "/user/login"
         };
 
         // Determine if the request is in the urls
@@ -42,12 +44,22 @@ public class LoginCheckFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
-        //check whether logged in
+        //check whether employee is logged in
         if(request.getSession().getAttribute("employee") != null){
             log.info("User has already logged in, id: {}", request.getSession().getAttribute("employee"));
             Long empId = (Long) request.getSession().getAttribute("employee");
 
             BaseContext.setCurrentId(empId);
+
+            filterChain.doFilter(request, response);
+            return;
+        }
+        //check whether user is logged in
+        if(request.getSession().getAttribute("user") != null){
+            log.info("User has already logged in, id: {}", request.getSession().getAttribute("user"));
+            Long userId = (Long) request.getSession().getAttribute("user");
+
+            BaseContext.setCurrentId(userId);
 
             filterChain.doFilter(request, response);
             return;
