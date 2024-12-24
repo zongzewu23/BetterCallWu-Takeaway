@@ -1,10 +1,11 @@
 package com.zongzewu.bettercallwu.utils;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
 
 public class EmailSender {
-
     public static void sendEmail(String toEmail, String verificationCode) {
         // Sender's email and password
         final String fromEmail = "astrowu61@gmail.com";

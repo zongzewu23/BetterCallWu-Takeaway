@@ -14,9 +14,9 @@ return $axios({
 })
 }
 
-function loginoutApi() {
+function logoutApi() {
   return $axios({
-    'url': '/user/loginout',
+    'url': '/user/logout',
     'method': 'post',
   })
 }
