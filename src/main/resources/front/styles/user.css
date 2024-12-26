@@ -84,21 +84,20 @@
 }
 
 #user .divLinks {
-  height: 104rem;
+  height: auto;
   opacity: 1;
   background: #ffffff;
   border-radius: 6rem;
-  padding-left: 17rem;
-  padding-right: 11rem;
+  padding: 10rem 11rem;
   margin: 10rem;
 }
 
 #user .divLinks .item {
-  height: 51rem;
-  line-height: 51rem;
-  position: relative;
+  height: auto;
+  line-height: normal;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 #user .divLinks .divSplit {
@@ -114,12 +113,19 @@
   margin-right: 5rem;
 }
 
+#user .divLinks .item span {
+  font-size: 14rem;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
 #user .divLinks .item i {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translate(0, -50%);
 }
+
 
 #user .divOrders {
   margin: 0 10rem 10rem 10rem;
