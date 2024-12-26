@@ -9,7 +9,7 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/reggie?serverTimezone=America/Los_Angeles&useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://localhost:3306/BetterCallWu?serverTimezone=America/Los_Angeles&useUnicode=true&characterEncoding=utf8
       username: root
       password: "20040622Wzz@"
     output:

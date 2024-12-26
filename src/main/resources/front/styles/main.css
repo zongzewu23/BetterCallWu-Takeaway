@@ -60,7 +60,7 @@
 
 #main .divTitle .divStatic .divDesc .divSend {
   opacity: 1;
-  font-size: 11rem;
+  font-size: 10rem;
   font-family: PingFangSC, PingFangSC-Regular;
   font-weight: 400;
   text-align: left;
@@ -69,17 +69,18 @@
 }
 
 #main .divTitle .divStatic .divDesc .divSend img {
-  width: 14rem;
-  height: 14rem;
+  width: 12rem;
+  height: 12rem;
   opacity: 1;
   vertical-align: sub;
 }
 
 #main .divTitle .divStatic .divDesc .divSend span {
-  margin-right: 12rem;
+  margin-right: 13rem;
 }
 
 #main .divTitle .divStatic .divDesc .divSend span:last-child {
+display: block;
   margin-right: 0;
 }
 

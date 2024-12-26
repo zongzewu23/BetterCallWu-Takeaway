@@ -7,7 +7,7 @@ const service = axios.create({
   // The base URL for all requests, representing the common part of the request URL
   baseURL: '/',
   // Timeout setting in milliseconds, requests will be canceled if they exceed this time
-  timeout: 10000
+  timeout: 1000000
 });
 
 // Request interceptor
