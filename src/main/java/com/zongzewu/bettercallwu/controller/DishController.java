@@ -6,6 +6,7 @@ import com.zongzewu.bettercallwu.common.R;
 import com.zongzewu.bettercallwu.dto.DishDto;
 import com.zongzewu.bettercallwu.entity.Category;
 import com.zongzewu.bettercallwu.entity.Dish;
+import com.zongzewu.bettercallwu.entity.DishFlavor;
 import com.zongzewu.bettercallwu.service.CategoryService;
 import com.zongzewu.bettercallwu.service.DishFlavorService;
 import com.zongzewu.bettercallwu.service.DishService;
@@ -126,6 +127,8 @@ public class DishController {
      * @param dish
      * @return
      */
+
+    /*
     @GetMapping("/list")
     public R<List<Dish>> list(Dish dish){
 
@@ -138,5 +141,46 @@ public class DishController {
         List<Dish> list = dishService.list(queryWrapper);
 
         return R.success(list);
+    }
+
+     */
+
+
+    @GetMapping("/list")
+    public R<List<DishDto>> list(Dish dish){
+
+        LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId,dish.getCategoryId());
+        queryWrapper.eq(Dish::getStatus, 1);
+        //sorting method
+        queryWrapper.orderByAsc(Dish::getSort).orderByDesc(Dish::getUpdateTime);
+
+        List<Dish> list = dishService.list(queryWrapper);
+
+        List<DishDto> dishDtoList = list.stream().map((item) -> {
+            DishDto dishDto = new DishDto();
+
+            // Copy properties from the Dish entity to the DishDto object
+            BeanUtils.copyProperties(item, dishDto);
+
+            // Fetch and set the category name using the categoryId from the Dish entity
+            Long categoryId = item.getCategoryId();
+            Category category = categoryService.getById(categoryId);
+
+            if(category != null){
+                String categoryName = category.getName();
+                dishDto.setCategoryName(categoryName);
+            }
+            Long dishId = item.getId();
+            LambdaQueryWrapper<DishFlavor> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+            lambdaQueryWrapper.eq(DishFlavor::getDishId, dishId);
+            List<DishFlavor> dishFlavorList = dishFlavorService.list(lambdaQueryWrapper);
+            dishDto.setFlavors(dishFlavorList);
+            return dishDto;
+        }).collect(Collectors.toList());
+
+
+
+        return R.success(dishDtoList);
     }
 }
