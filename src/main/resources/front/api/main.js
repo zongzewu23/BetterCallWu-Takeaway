@@ -27,8 +27,8 @@ function setmealListApi(data) {
 //Get the collection of items in the shopping cart
 function cartListApi(data) {
     return $axios({
-        //'url': '/shoppingCart/list',
-        'url': '/front/cartData.json',
+        'url': '/shoppingCart/list',
+        //'url': '/front/cartData.json',
         'method': 'get',
         params:{...data}
     })

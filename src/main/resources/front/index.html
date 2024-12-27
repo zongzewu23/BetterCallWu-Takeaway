@@ -131,7 +131,7 @@
                 <div class="divSubtract">
                   <img src="./images/subtract.png" @click="cartNumberSubtract(item)"/>
                 </div>
-                <div class="divDishNum">{{item.number}}</div>
+                <div class="divDishNum" style="font-size: 15rem;">{{item.number}}</div>
                 <div class="divAdd">
                   <img src="./images/add.png" @click="cartNumAdd(item)"/>
                 </div>
@@ -204,11 +204,11 @@
                   <div class="divSubtract" v-if="setMealDialog.item.number > 0">
                     <img src="./images/subtract.png" @click="subtractCart(setMealDialog.item)"/>
                   </div>
-                  <div class="divDishNum">{{setMealDialog.item.number}}</div>
+                  <div class="divDishNum" >{{setMealDialog.item.number}}</div>
                   <div class="divAdd" v-if="setMealDialog.item.number">
                     <img src="./images/add.png" @click="addCart(setMealDialog.item)"/>
                   </div>
-                  <div class="addCart"  @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">加入购物车</div>
+                  <div class="addCart"  @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">add to cart</div>
               </div>
           </div>
           <div class="detailsDialogClose" @click="setMealDialog.show = false">
