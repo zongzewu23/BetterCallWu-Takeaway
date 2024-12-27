@@ -61,7 +61,7 @@
                     <span class="price">${{order[0].amount}}</span>
                 </div>
                 <div class="btn" v-if="order[0].status === 4">
-                    <div class="btnAgain" @click="addOrderAgain">再来一单</div>
+                    <div class="btnAgain" @click="addOrderAgain">Order Again</div>
                 </div>
             </div>
             <div class="quitLogin" @click="toPageLogin">
@@ -91,16 +91,17 @@
                         code:''
                     },
                     msgFlag:false,
-                    order:[{
-                        orderTime:'',//下单时间
-                        status:undefined,//订单状态 1已结账，2未结账，3已退单，4已完成，5已取消
-                        orderDetails:[{
-                            name:'',//菜品名称
-                            number:undefined,//数量
-                        }],//明细
-                        amount:undefined,//实收金额
-                        sumNum:0,//菜品总数
-                    }],
+                    order: [{
+    orderTime: '', // Order Time
+    status: undefined, // Order Status: 1 - Paid, 2 - Unpaid, 3 - Refunded, 4 - Completed, 5 - Cancelled
+    orderDetails: [{
+        name: '', // Dish Name
+        number: undefined, // Quantity
+    }], // Details
+    amount: undefined, // Actual Amount Received
+    sumNum: 0, // Total Dish Quantity
+}],
+
                 }
             },
             computed:{},
@@ -145,28 +146,27 @@
                         this.$notify({ type:'warning', message:res.msg});
                     }
                 },
-                getStatus(status){
-                    let str = ''
-                    switch(status){
-                        case 1:
-                            str =  '待付款'
-                        break;
-                        case 2:
-                            str =  '正在派送'
-                        break;
-                        case 3:
-                            str =  '已派送'
-                        break;
-                        case 4:
-                            str =  '已完成'
-                        break;
-                        case 5:
-                            str =  '已取消'
-                        break;
-
-                    }
-                    return str
-                },
+                getStatus(status) {
+    let str = '';
+    switch (status) {
+        case 1:
+            str = 'Pending Payment';
+            break;
+        case 2:
+            str = 'In Delivery';
+            break;
+        case 3:
+            str = 'Delivered';
+            break;
+        case 4:
+            str = 'Completed';
+            break;
+        case 5:
+            str = 'Cancelled';
+            break;
+    }
+    return str;
+},
                 async addOrderAgain(){
                     const res = await orderAgainApi({id:this.order[0].id})
                     if(res.code === 1){

@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="divContent">
-                <img src="./../images/success.png"/>
-                <div class="divSuccess">下单成功</div>
-                <div class="divDesc">预计{{finishTime}}到达</div>
-                <div class="divDesc1">后厨正在加紧制作中，请耐心等待~</div>
-                <div class="btnView" @click="toOrderPage">查看订单</div>
+                <img src="./../images/success.png" />
+                <div class="divSuccess">Order Placed Successfully</div>
+                <div class="divDesc">Estimated to arrive at {{finishTime}}</div>
+                <div class="divDesc1">The kitchen is working hard to prepare your order. Please wait patiently~</div>
+                <div class="btnView" @click="toOrderPage">View Order</div>
             </div>
         </div>
         <!-- Development version, including helpful command line warnings-->
@@ -68,7 +68,6 @@
                         window.location.replace('/front/index.html')
                     })  
                 },
-                //获取送达时间
                 getFinishTime(){
                     let now = new Date()
                     let hour = now.getHours() +1

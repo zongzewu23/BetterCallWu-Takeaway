@@ -27,7 +27,7 @@
             <div class="divContent">
                 <div class="divItem" v-for="(item,index) in addressList" :key="index" @click.capture="itemClick(item)">
                     <div class="divAddress">
-                        <span :class="{spanCompany:item.label === '公司',spanHome:item.label === '家',spanSchool:item.label === '学校'}">{{item.label}}</span>
+                        <span :class="{spanCompany:item.label === 'campany',spanHome:item.label === 'home',spanSchool:item.label === 'school'}">{{item.label}}</span>
                         {{item.detail}}
                     </div>
                     <div class="divUserPhone">
