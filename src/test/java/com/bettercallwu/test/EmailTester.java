@@ -34,4 +34,5 @@ public class EmailTester {
 
         scanner.close();
     }
+
 }
