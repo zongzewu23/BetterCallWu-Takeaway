@@ -9,6 +9,7 @@ import com.zongzewu.bettercallwu.utils.VerificationCodeGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @PostMapping("/sendMsg")
     public R<String> sendMsg(@RequestBody User user, HttpSession session){
@@ -35,7 +40,8 @@ public class UserController {
                 log.info("code = {}", code);
             EmailSender.sendEmail(email, code);
 
-            session.setAttribute(email, code);
+            //session.setAttribute(email, code);
+            redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES);
             return R.success("email is now sent");
         }
 
@@ -50,9 +56,11 @@ public class UserController {
         //get code
         String code = map.get("code").toString();
         //get verification code from session
-        Object verifyCodeInSession = session.getAttribute(email);
+        //Object verifyCode = session.getAttribute(email);
+
+        Object verifyCode = redisTemplate.opsForValue().get(email);
         //compare code and verification code
-        if(verifyCodeInSession != null && verifyCodeInSession.equals(code)){
+        if(verifyCode!= null && verifyCode.equals(code)){
 
 
             LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
@@ -67,6 +75,8 @@ public class UserController {
             }
             session.setAttribute("user", user.getId());
                 //equal and exists in user table, login successful
+
+                redisTemplate.delete(email);
                 return R.success(user);
         }
         // not equal

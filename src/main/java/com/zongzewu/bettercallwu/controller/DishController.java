@@ -13,9 +13,12 @@ import com.zongzewu.bettercallwu.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -25,6 +28,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/dish")
 @Slf4j
 public class DishController {
+
+    @Autowired
+    private RedisTemplate redisTemplate;
     @Autowired
     private DishService dishService;
     @Autowired
@@ -39,9 +45,14 @@ public class DishController {
      */
     @PostMapping
     public R<String> save(@RequestBody DishDto dishDto){
-      log.info(dishDto.toString());
+        log.info(dishDto.toString());
 
-      dishService.saveWithFlavor(dishDto);
+        dishService.saveWithFlavor(dishDto);
+
+        //Set keys = redisTemplate.keys("dish_*");
+        //clean cache under a specific category
+        String key = "dish_" + dishDto.getCategoryId() + "_1";
+        redisTemplate.delete(key);
         return R.success("Successfully added new dish");
     }
 
@@ -119,6 +130,12 @@ public class DishController {
         log.info(dishDto.toString());
 
         dishService.updateWithFlavor(dishDto);
+
+        //Set keys = redisTemplate.keys("dish_*");
+        //clean cache under a specific category
+        String key = "dish_" + dishDto.getCategoryId() + "_1";
+        redisTemplate.delete(key);
+
         return R.success("Successfully modified this dish");
     }
 
@@ -148,6 +165,17 @@ public class DishController {
 
     @GetMapping("/list")
     public R<List<DishDto>> list(Dish dish){
+        List<DishDto> dishDtoList = null;
+        //construct key dynamically
+        String key = "dish_" + dish.getCategoryId() + "_" + dish.getStatus();
+        //get cache from redis
+        dishDtoList = (List<DishDto>) redisTemplate.opsForValue().get(key);
+        if(dishDtoList != null){
+            return R.success(dishDtoList);
+        }
+        //exists, return without querying sql
+
+        //not exists
 
         LambdaQueryWrapper<Dish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(dish.getCategoryId() != null, Dish::getCategoryId,dish.getCategoryId());
@@ -157,7 +185,7 @@ public class DishController {
 
         List<Dish> list = dishService.list(queryWrapper);
 
-        List<DishDto> dishDtoList = list.stream().map((item) -> {
+        dishDtoList = list.stream().map((item) -> {
             DishDto dishDto = new DishDto();
 
             // Copy properties from the Dish entity to the DishDto object
@@ -179,7 +207,8 @@ public class DishController {
             return dishDto;
         }).collect(Collectors.toList());
 
-
+        //not exists so need to query sql and save the results to redis
+        redisTemplate.opsForValue().set(key, dishDtoList, 60, TimeUnit.MINUTES);
 
         return R.success(dishDtoList);
     }
