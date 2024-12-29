@@ -26,6 +26,7 @@
 - **FastJSON**: Handle JSON serialization and deserialization.
 - **Apache Commons Lang**: Utility library for Java.
 - **JUnit**: Testing framework for unit and integration tests.
+- **Redis Integration**: Improve caching performance.
 
 ### Frontend
 - **Vue.js**: Progressive JavaScript framework for building user interfaces.
@@ -122,7 +123,6 @@ http://localhost:8080/swagger-ui/
 ---
 
 ## Future Plans
-- **Redis Integration**: Improve caching performance.
 - **Dockerization**: Containerize the application for easy deployment.
 - **Role-Based Access Control (RBAC)**: Enhance security.
 - **Real-Time Notifications**: Implement using WebSocket.
